@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 import { Typography } from '@material-ui/core';
 import LoginModal from '../../components/modals/LoginModal';
-import backgroundImage from '../../assests/blockchain_3.jpg';
+import backgroundImage from '../../assests/blockchain_1.jpg';
 
 const useStyles = makeStyles((theme) => ({
   title: {

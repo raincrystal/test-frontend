@@ -9,13 +9,20 @@ import {
   Link,
   Typography,
   withStyles,
+  InputLabel,
+  FormControl,
 } from '@material-ui/core';
 import MuiDialog from '@material-ui/core/Dialog';
 import { makeStyles } from '@material-ui/styles';
+import NativeSelect from '@material-ui/core/NativeSelect';
 
 const Dialog = withStyles((theme) => ({
   paper: {
     padding: theme.spacing(3, 5, 1, 5),
+    background: '#f7f7f7',
+    border: '4px solid #0066cc',
+    borderRadius: '20px',
+    maxWidth: 400,
   },
 }))(MuiDialog);
 
@@ -30,12 +37,25 @@ const useStyles = makeStyles((theme) => ({
   },
   otherLink: {
     display: 'flex',
-    padding: theme.spacing(2, 0),
+    padding: theme.spacing(1, 0),
   },
   actions: {
-    margin: theme.spacing(2, 0),
+    margin: theme.spacing(1, 0),
+  },
+  formControl: {
+    margin: theme.spacing(1, 0),
   },
 }));
+
+const roles = [
+  'System Admin',
+  'Contract Specialist',
+  'Small Business Specialist',
+  'Technical Specialist',
+  'Financial',
+  'Vendor/Contractor',
+  'Logistis',
+];
 
 const CustomModal = (props) => {
   const classes = useStyles();
@@ -48,12 +68,21 @@ const CustomModal = (props) => {
     handleLogin();
   };
 
+  const roleOptions = roles.map((r) => ({
+    value: r.split(' ').join('_'),
+    label: r,
+  }));
+  const [role, setRole] = useState('');
+  const handleChangeRole = (event) => {
+    setRole(event.target.value);
+  };
+
   const preventDefault = (event) => event.preventDefault();
 
   return (
     <Dialog open={open} aria-labelledby="form-dialog-title">
       <DialogTitle>
-        <Typography className={classes.title}>Welcome to Login</Typography>
+        <Typography className={classes.title}>Login</Typography>
       </DialogTitle>
       <DialogContent>
         <TextField
@@ -71,6 +100,18 @@ const CustomModal = (props) => {
           type="password"
           fullWidth
         />
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="age-native-helper">Role</InputLabel>
+          <NativeSelect
+            value={role}
+            onChange={handleChangeRole}
+          >
+            <option value=""></option>
+            {roleOptions.map((userRole) => (
+              <option value={userRole.value} key={userRole.value}>{userRole.label}</option>
+            ))}
+          </NativeSelect>
+        </FormControl>
         <div className={classes.otherLink}>
           <Link className={classes.forgotLink} href="/login" onClick={preventDefault}>
             Forgot username?
@@ -103,7 +144,8 @@ CustomModal.propTypes = {
 };
 
 CustomModal.defaultProps = {
-  handleLogin: () => {},
+  handleLogin: () => {
+  },
 };
 
 export default CustomModal;
