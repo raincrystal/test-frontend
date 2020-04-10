@@ -1,57 +1,52 @@
 import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from '@material-ui/core';
+import { Redirect } from 'react-router-dom';
 
-const LoginDialog = () => {
-  const [open, setOpen] = useState(false);
+import { makeStyles } from '@material-ui/styles';
+import { Typography } from '@material-ui/core';
+import LoginModal from '../../components/modals/LoginModal';
+import backgroundImage from '../../assests/blockchain_3.jpg';
 
-  const handleClickOpen = () => {
-    setOpen(true);
+const useStyles = makeStyles((theme) => ({
+  title: {
+    fontSize: 80,
+    fontWeight: 600,
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    color: 'white',
+    position: 'absolute',
+    top: theme.spacing(8),
+  },
+  wrapper: {
+    width: '100%',
+    height: '100vh',
+  },
+  background: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  },
+}));
+
+const Login = () => {
+  const classes = useStyles();
+
+  const [gotoHomepage, setGotoHomepage] = useState(false);
+  const handleLogin = () => {
+    setGotoHomepage(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  if (gotoHomepage) {
+    return <Redirect to="/homepage" />;
+  }
 
   return (
-    <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open form dialog
-      </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here. We will send updates
-            occasionally.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Subscribe
-          </Button>
-        </DialogActions>
-      </Dialog>
+    <div className={classes.wrapper}>
+      <img src={backgroundImage} className={classes.background} alt="background" />
+      <Typography className={classes.title}>Market Research Tool</Typography>
+      <LoginModal handleLogin={handleLogin} />
     </div>
   );
 };
 
-export default LoginDialog;
+export default Login;
