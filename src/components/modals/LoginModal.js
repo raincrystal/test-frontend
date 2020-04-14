@@ -17,11 +17,17 @@ import { makeStyles } from '@material-ui/styles';
 import NativeSelect from '@material-ui/core/NativeSelect';
 
 const Dialog = withStyles((theme) => ({
+  root: {
+    '& .MuiBackdrop-root': {
+      display: 'none',
+    },
+  },
   paper: {
-    padding: theme.spacing(3, 5, 1, 5),
+    padding: theme.spacing(3, 3, 1, 3),
     background: '#f7f7f7',
-    border: '4px solid #0066cc',
+    border: '3px solid #0066cc',
     borderRadius: '20px',
+    boxShadow: '0 0 3px 3px #EEEEEE',
     maxWidth: 400,
   },
 }))(MuiDialog);

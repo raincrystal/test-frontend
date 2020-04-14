@@ -4,18 +4,20 @@ import { Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 import { Typography } from '@material-ui/core';
 import LoginModal from '../../components/modals/LoginModal';
-import backgroundImage from '../../assests/blockchain_1.jpg';
+import backgroundImage from '../../assests/image_1.jpg';
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    fontSize: 80,
+    fontSize: 90,
     fontWeight: 600,
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
-    color: 'white',
+    color: '#1c80b0',
+    textAlign: 'center',
     position: 'absolute',
-    top: theme.spacing(8),
+    top: theme.spacing(4),
+    // mixBlendMode: 'difference',
   },
   wrapper: {
     width: '100%',
